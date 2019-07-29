@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+    {{error}}
+    <br>
+    <br>
+{% endif%}
+
+<div class = "container">
+    <h1>Login</h1>
+    <br>
+    <div style = "text-align:center;">
+        <form method = "POST" action = "{% url 'login' %}">
+
+            {% csrf_token %}
+            Username:
+            <br>
+            <input type = "text" name = "username" value = "">
+            <br>
+            Password:
+            <br>
+            <input type = "password" name = "password" value = "">
+            <br><br>
+            <input class="btn btn-outline-dark" type = "submit" value = "Login">
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% comment%}
+
+{% if error %}
+    {{error}}
+{% endif%}
+
+만약에 error가 발생하면 views.py에서 설정한 error message를 출력하겠다... 
+
+웹페이지에서 서버로 데이터를 보낼 때, 특별한 메시지에 담아서 보내는데 이를 HTTP Request Message라고 부름.
+데이터를 보내는 방식에는 POST, GET, PUT, DELETE이 있음.
+GET 방식은 데이터를 보낼 때 url에 뒤에 붙어서 전달되지만, POST 방식은 눈에 보이지 않도록 숨겨져서 보내짐.
+그래서 게시글 작성이나 회원가입, 로그인과 같은 기능은 POST 방식을 이용.
+
+<form> 태그에서 action 옵션에는 <form> 태그를 통해서 입력된 데이터를 전송할 대상이 들어감.
+action = "{% url 'login' %}" 은 login이라는  url을 통해 데이터를 보내겠다는 의미로 받아들면 될 듯... 
+
+
+위의 코드에서 {% csrf_token %}은 보안을 위해서 써주는 것으로 method가 POST인 경우에는 써주어야 함.
+또 <form> 태그 안에 써야만 보안을 위한 정보가 데이터를 서버로 보낼 때 같이 전달 됨.
+
+{% endcomment%}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div style="padding: 5px 80px;">
+        <h3>제목: {{blogs.title}}</h3>
+        <p>작성 날짜:{{blogs.pub_date}}</p>
+        <p>본문: {{blogs.body}}</p>
+        <br>
+    </div>
+    <div style="text-align:right;">
+        <a href="{% url 'postremove' blogs.id %}" class="btn btn-outline-danger">삭제하기</a>
+        <a href="{% url 'postedit' blogs.id %}"class="btn btn-outline-success">수정하기</a>
+    </div>
+
+{% endblock%}
+
+{% comment %}
+
+    게시물을 삭제하고 수정할 때 어떤 게시물을 삭제할 것인지에 대한 정보를 view에 전달하기 위해 id값을 같이 써줌. 
+
+{% endcomment%}

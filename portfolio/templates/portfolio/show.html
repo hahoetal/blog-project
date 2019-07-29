@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<div class="card">
+  <div class="card-body">
+        <div style="text-align:center;">
+            <img class="card-img-top" src="{{portfolios.image.url}}"  alt ="사진" class="rounded">
+        </div>
+        <br>
+        <div style="margin:3px 80px;">
+            <h3>{{portfolios.title}}</h3>
+            <p>{{portfolios.description}}</p>
+        </div>
+        <br><br>
+        <div style="text-align:right;">
+            <a href="{% url 'remove' portfolios.id %}" class="btn btn-outline-danger">삭제하기</a>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock%}

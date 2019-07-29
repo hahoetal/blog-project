@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load staticfiles %}
+<br>
+    <form enctype="multipart/form-data" method="POST">{% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <br>
+        <div style="text-align:center;">
+        <input class="btn btn-dark" type="submit" value="저장하기">
+        </div>
+    </form>
+
+{% endblock%}

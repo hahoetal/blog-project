@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div id = "category">
+        <table>
+            <tr>
+                <th>제목</th>
+                <th>본문 미리보기</th>
+                <th>작성일자</th>                
+            </tr>
+        {% for search_list in search_list %}
+            <tr>
+                <td style ="text-align:center;">{{search_list.title}}</td>
+                <td>{{search_list.summary}}<a href="{%url 'detail' search_list.id%}">...more</a></td>
+                <td style ="text-align:center;">{{search_list.pub_date}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}

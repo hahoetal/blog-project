@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load staticfiles %}
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v3.8.5">
+  <title>일상을 끄적끄적</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+
+    <!-- Bootstrap core CSS -->
+  <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+</head>
+
+<body>
+<main role="main">
+  <div style="text-align:center;">
+    <h3><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+    일상 사진</h3>
+    <p class="lead text-muted">일상 사진을 올리는 공간입니다.</p>
+    <p><a href="{% url 'newimage' %}" class="btn btn-dark">사진 올리기</a></p>
+  </div>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+          <img class="card-img-top" src="{% static 'dog.jpg '%}" alt="이쁜이" width=345px height=225px>
+            <div class="card-body">
+            <h4>이쁜이</h4>
+              <p class="card-text">2018년 캄보디아에서 찍은 골든 리트리버. 이때 1살도 안 된 아기라서 그런지 에너지가 장난 아니었다.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% for portfolios in portfolios.all %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="card-img-top" src="{{ portfolios.image.url}}" alt ="사진">
+            <div class="card-body">
+            <h4>{{ portfolios.title }}</h4>
+              <p class="card-text">{{ portfolios.summary }}...</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{% url 'portfolios' portfolios.id %}" class="btn btn-sm btn-outline-secondary">View</a>
+                  <a href="{% url 'edit' portfolios.id%}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                </div>
+                <small class="text-muted">{{portfolios.pub_date}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+</main>
+
+<footer class="text-muted">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script></body>
+{% endblock %}
+
+{% comment%}
+  
+  Django는 static file(동적 파일)을 static(개발가가 준비)과 media(이용자가 올림)로 구분.
+  
+  첫 번째 사진은 static.
+  프로젝트를 만드는 과정에서 미리 넣어놓은 것.
+  앱 폴더 안에 static 폴더를 만들고 그곳에 사진을 담음.
+
+  settings.py에서 코드 추가하기(맨 밑에).
+
+  'python manage.py collectstatic' 터미널에 명령어를 실행하면 파일이 한 곳으로 모이게 됨.
+
+  사진이 html 상에 보이게 하려면 위에 {% load staticfiles %}를 작성하여 파일을 불러와야 함.
+
+-----------------------------------
+
+  그 다음 사진들은 media.
+  이용자들이 올리는 파일.
+
+ settings.py에 코드 추가하기(맨 밑에).
+
+ urls.py에 코드 추가하기.
+
+ model 만들기.
+ pillow 설치하기. 'pip install Pillow' 이미지 업로드를 위해서 필요함.
+(모델을 만들었으면 makemigartion과 migrate를 하자!! 이는 Django과 DB가 별개의 것이기 때문에 DB에게 알려주어야 하기 때문.)
+
+ admin.py에 코드 추가.
+
+view.py에 코드 작성.
+
+!!! static과 media는 사진을 불러오는 방식이 다름.
+잘 모르겠으면 위에 있는 코드 참고하기.
+static은 56번째, media는 74번째 줄.
+
+{% endcomment%}

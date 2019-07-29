@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+    {{error}}
+    <br>
+    <br>
+{% endif %}
+
+<div class = "container">
+    <h1>Sign Up</h1>
+    <br>
+    <div style = "text-align:center;">
+        <form method = "POST" action = "{% url 'signup' %}">
+
+            {% csrf_token %}
+            Username:
+            <br>
+            <input type ="text" name = "username" value = "">
+            <br>
+            Password:
+            <br>
+            <input type = "password" name = "password1" value = "">
+            <br>
+            Confirm Password:
+            <br>
+            <input type = "password" name = "password2" value = "">
+            <br>
+            <br>
+            <input class="btn btn-outline-dark" type = "submit" value = "Sign Up!">
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% comment%}
+
+회원 가입을 할 때 비밀번호가 일치하는지 확인하는 과정!
+입력되는 비밀번호를 구분하기 위해 이름을 다르게 지어주기.
+그렇지 않으면 덮어씌우는 꼴이 되어버려서 비밀번호를 두 번 입력하게 하는 의미가 없음.
+
+{% endcomment%}
